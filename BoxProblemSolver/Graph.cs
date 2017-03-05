@@ -36,7 +36,7 @@ namespace BoxProblemSolver
             for (int i = 0; i < graph.vertices.Count; i++)
             {
                 oldVertices[graph.vertices[i]] = i;
-                vertices.Add(new Vertex());
+                vertices.Add(graph.vertices[i].Copy());
             }
             foreach (var vertex in graph.vertices)
             {

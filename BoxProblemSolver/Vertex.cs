@@ -33,5 +33,10 @@ namespace BoxProblemSolver
         {
             return enteringEdges.Count > 0;
         }
+
+	    public virtual Vertex Copy()
+	    {
+		    return new Vertex();
+	    }
     }
 }
