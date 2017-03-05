@@ -1,0 +1,2 @@
+D:\Dokumenty\Szkoła\MT\BoxProblemSolver\BoxProblemSolver\bin\Debug\BoxProblemSolver.exe.config
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\bin\Debug\BoxProblemSolver.exe.config
