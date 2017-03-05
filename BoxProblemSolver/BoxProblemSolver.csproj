@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BoxProblemSolver.cs" />
     <Compile Include="BoxVertex.cs" />
     <Compile Include="PriorityQueue.cs" />
     <Compile Include="Vertex.cs" />

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace BoxProblemSolver
 {
@@ -20,6 +23,8 @@ namespace BoxProblemSolver
     /// </summary>
     public partial class MainWindow : Window
     {
+	    private BoxSolver solver;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -34,14 +39,66 @@ namespace BoxProblemSolver
 
 		    double scale = BoxCanvas.Width / results[0].Width;
 
+		    var rand = new Random();
+
 			foreach (var vertex in results)
 		    {
-			    Rectangle rect = new Rectangle();
-			    rect.Width = scale * vertex.Width;
-			    rect.Height = scale * vertex.Height;
+			    Rectangle rect = new Rectangle
+			    {
+				    Width = scale * vertex.Width,
+				    Height = scale * vertex.Height,
+				    Stroke = new SolidColorBrush(Colors.Black),
+				    StrokeThickness = 0.5,
+				    Fill =
+					    new SolidColorBrush(Color.FromRgb((byte) rand.Next(0, 30), (byte) rand.Next(0, 190), (byte) rand.Next(220, 255)))
+			    };
 			    BoxCanvas.Children.Add(rect);
-				Canvas.SetLeft(rect, rect.Width);
+				Canvas.SetLeft(rect, 0.5 * (BoxCanvas.Width - rect.Width));
+				Canvas.SetTop(rect, 0.5 * (BoxCanvas.Height - rect.Height));
 		    }
+	    }
+
+	    private void LoadClick(object sender, RoutedEventArgs e)
+	    {
+		    var dialog = new OpenFileDialog
+		    {
+			    Multiselect = false,
+			    CheckFileExists = true,
+			    InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory,
+			    RestoreDirectory = true
+		    };
+		    dialog.ShowDialog();
+			var vertices = new List<BoxVertex>();
+		    try
+		    {
+			    using (var sr = new StreamReader(dialog.OpenFile()))
+			    {
+				    var s = sr.ReadToEnd().Split(new[] {' ', '\n', '\t'}, StringSplitOptions.RemoveEmptyEntries);
+				    for (int i = 0; i < s.Length / 2; ++i)
+				    {
+					    vertices.Add(new BoxVertex(double.Parse(s[2 * i]), double.Parse(s[2 * i + 1])));
+				    }
+			    }
+		    }
+		    catch (Exception ex)
+		    {
+			    MessageBox.Show(this, $"An error occurred while loading: {ex.Message}", "Error");
+		    }
+			MessageBox.Show(this, $"Loaded {vertices.Count} boxes.", "Result");
+			if (vertices.Count == 0)
+				return;
+		    solver = new BoxSolver(vertices);
+		    RunButton.IsEnabled = true;
+	    }
+
+	    private void RunClick(object sender, RoutedEventArgs e)
+	    {
+		    var results = solver.Run();
+		    var lines = new List<string>(results.Count);
+		    foreach (var vertex in results)
+				lines.Add($"{vertex.Width} {vertex.Height}");
+			System.IO.File.WriteAllLines("results.out", lines);
+			DrawResults(results);
 	    }
     }
 }
