@@ -35,11 +35,11 @@ namespace BoxProblemSolver
             for (int i = 0; i < graph.vertices.Count; i++)
             {
                 oldVertices[graph.vertices[i]] = i;
-                vertices.Add(new Vertex());
+                vertices.Add(graph.vertices[i].Copy());
             }
             foreach (var vertex in graph.vertices)
             {
-                foreach (var edgeEnd in vertex.exitingEdges)
+                foreach (var edgeEnd in vertex.ExitingEdges)
                 {
                     AddEdge(vertices[oldVertices[vertex]], vertices[oldVertices[edgeEnd]]);
                 }
@@ -56,7 +56,7 @@ namespace BoxProblemSolver
                 Vertex vertex = startVertices.First();
                 startVertices.Remove(vertex);
                 result.Add(vertex);
-                foreach (var edgeEnd in vertex.exitingEdges)
+                foreach (var edgeEnd in vertex.ExitingEdges)
                 {
                     graph.RemoveEdge(vertex, edgeEnd);
                     if (!edgeEnd.HasEnteringEdges())

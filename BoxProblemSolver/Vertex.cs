@@ -8,30 +8,35 @@ namespace BoxProblemSolver
 {
     public class Vertex
     {
-        public HashSet<Vertex> exitingEdges { get; protected set; }
-        public HashSet<Vertex> enteringEdges { get; protected set; }
+        public HashSet<Vertex> ExitingEdges { get; protected set; }
+        public HashSet<Vertex> EnteringEdges { get; protected set; }
 
         public Vertex()
         {
-            exitingEdges = new HashSet<Vertex>();
-            enteringEdges = new HashSet<Vertex>();
+            ExitingEdges = new HashSet<Vertex>();
+            EnteringEdges = new HashSet<Vertex>();
         }
 
         public void AddEdge(Vertex to)
         {
-            exitingEdges.Add(to);
-            to.enteringEdges.Add(this);
+            ExitingEdges.Add(to);
+            to.EnteringEdges.Add(this);
         }
 
         public void RemoveEdge(Vertex to)
         {
-            exitingEdges.Remove(to);
-            to.exitingEdges.Remove(this);
+            ExitingEdges.Remove(to);
+            to.ExitingEdges.Remove(this);
         }
 
         public bool HasEnteringEdges()
         {
-            return enteringEdges.Count > 0;
+            return EnteringEdges.Count > 0;
         }
+
+	    public virtual Vertex Copy()
+	    {
+		    return new Vertex();
+	    }
     }
 }
