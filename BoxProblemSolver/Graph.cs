@@ -32,7 +32,6 @@ namespace BoxProblemSolver
         public Graph(Graph graph)
         {
             var oldVertices = new Dictionary<Vertex, int>();
-
             for (int i = 0; i < graph.vertices.Count; i++)
             {
                 oldVertices[graph.vertices[i]] = i;
@@ -76,6 +75,11 @@ namespace BoxProblemSolver
                     result.Add(vertex);
             }
             return result;
+        }
+
+        public List<Vertex> FindLongestPath()
+        {
+            throw new NotImplementedException();
         }
     }
 }
