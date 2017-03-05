@@ -40,7 +40,7 @@ namespace BoxProblemSolver
             }
             foreach (var vertex in graph.vertices)
             {
-                foreach (var edgeEnd in vertex.exitingEdges)
+                foreach (var edgeEnd in vertex.ExitingEdges)
                 {
                     AddEdge(vertices[oldVertices[vertex]], vertices[oldVertices[edgeEnd]]);
                 }
@@ -57,7 +57,7 @@ namespace BoxProblemSolver
                 Vertex vertex = startVertices.First();
                 startVertices.Remove(vertex);
                 result.Add(vertex);
-                foreach (var edgeEnd in vertex.exitingEdges)
+                foreach (var edgeEnd in vertex.ExitingEdges)
                 {
                     graph.RemoveEdge(vertex, edgeEnd);
                     if (!edgeEnd.HasEnteringEdges())
