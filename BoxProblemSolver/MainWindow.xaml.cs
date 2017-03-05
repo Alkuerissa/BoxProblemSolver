@@ -24,5 +24,24 @@ namespace BoxProblemSolver
         {
             InitializeComponent();
         }
+
+	    private void DrawResults(List<BoxVertex> results)
+	    {
+		    if (results.Count == 0)
+			    return;
+
+			BoxCanvas.Children.Clear();
+
+		    double scale = BoxCanvas.Width / results[0].Width;
+
+			foreach (var vertex in results)
+		    {
+			    Rectangle rect = new Rectangle();
+			    rect.Width = scale * vertex.Width;
+			    rect.Height = scale * vertex.Height;
+			    BoxCanvas.Children.Add(rect);
+				Canvas.SetLeft(rect, rect.Width);
+		    }
+	    }
     }
 }

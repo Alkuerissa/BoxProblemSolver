@@ -5,8 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoxProblemSolver"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="600" Width="530">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Row="0" Name="BoxCanvas" Height="500" Width="500" Margin="10 10 10 10"></Canvas>
+        <StackPanel Orientation="Horizontal" Grid.Row="1"></StackPanel>        
     </Grid>
 </Window>
