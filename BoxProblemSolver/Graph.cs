@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,9 +10,10 @@ namespace BoxProblemSolver
     public class Graph
     {
         protected List<Vertex> vertices;
+        protected Dictionary<int, Vertex> indexVerticesMapping;
         protected int maxIndex;
 
-        public Graph(List<Vertex> start_vertices, List<Tuple<Vertex, Vertex>> edges)
+        public Graph(IEnumerable<Vertex> start_vertices, List<Tuple<Vertex, Vertex>> edges)
         {
             vertices = new List<Vertex>();
             maxIndex = 0;
@@ -20,6 +22,7 @@ namespace BoxProblemSolver
                 vertices.Add(vertex);
                 vertex.Index = maxIndex++;
             }
+            CreateVerticesDictionary();
 
             foreach (var egde in edges)
             {
@@ -36,23 +39,34 @@ namespace BoxProblemSolver
         {
             from.RemoveEdge(to);
         }
-        //TODO: it can be done better (probably)
+
         public Graph(Graph graph)
         {
-            var oldVertices = new Dictionary<Vertex, int>();
             vertices = new List<Vertex>();
-            for (int i = 0; i < graph.vertices.Count; i++)
+            maxIndex = graph.maxIndex;
+            foreach (var vertex in graph.vertices)
             {
-                oldVertices[graph.vertices[i]] = i;
-                vertices.Add(graph.vertices[i].Copy());
+                vertices.Add(vertex.Copy());
             }
+            CreateVerticesDictionary();
             foreach (var vertex in graph.vertices)
             {
                 foreach (var edgeEnd in vertex.ExitingEdges)
                 {
-                    AddEdge(vertices[oldVertices[vertex]], vertices[oldVertices[edgeEnd]]);
+                    AddEdge(indexVerticesMapping[vertex.Index],
+                            indexVerticesMapping[edgeEnd.Index]);
                 }
             }
+        }
+
+        protected void CreateVerticesDictionary()
+        {
+            indexVerticesMapping = new Dictionary<int, Vertex>();
+            foreach (var vertice in vertices)
+            {
+                indexVerticesMapping[vertice.Index] = vertice;
+            }
+
         }
 
         public List<Vertex> TopologicalSort()
@@ -64,7 +78,7 @@ namespace BoxProblemSolver
             {
                 Vertex vertex = startVertices.First();
                 startVertices.Remove(vertex);
-                result.Add(vertex);
+                result.Add(indexVerticesMapping[vertex.Index]);
                 while (vertex.ExitingEdges.Count > 0)
                 {
                     var edgeEnd = vertex.ExitingEdges.First();
@@ -94,6 +108,7 @@ namespace BoxProblemSolver
             var previousVerticeIndices = new int[maxIndex];
             var longestPathToVertex = new int[maxIndex];
             var currentLongestPathIndex = 0;
+            previousVerticeIndices[sortedVertices.First().Index] = -1;
 
             foreach (var vertex in sortedVertices.Skip(1))
             {
@@ -116,7 +131,8 @@ namespace BoxProblemSolver
             int i = currentLongestPathIndex;
             while (i != -1)
             {
-                //longestPath.Add();
+                longestPath.Add(indexVerticesMapping[i]);
+                i = previousVerticeIndices[i];
             }
             return longestPath;
         }

@@ -8,14 +8,13 @@ namespace BoxProblemSolverTests
     [TestClass]
     public class GraphTests
     {
-        [TestMethod]
-        public void TopologicalSortTest()
+        public Graph CreateSimpleGraph()
         {
             int n = 6;
             var vertices = new List<Vertex>();
             for (int i = 0; i < n; i++)
             {
-                vertices.Add(new IndexedVertex(i));
+                vertices.Add(new Vertex());
             }
             List<Tuple<Vertex, Vertex>> edges = new List<Tuple<Vertex, Vertex>>
             {
@@ -26,8 +25,23 @@ namespace BoxProblemSolverTests
                 new Tuple<Vertex, Vertex>(vertices[3], vertices[5]),
                 new Tuple<Vertex, Vertex>(vertices[4], vertices[3]),
             };
-            var graph = new Graph(vertices, edges);
+            return new Graph(vertices, edges);
+        }
+
+        [TestMethod]
+        public void SimpleTopologicalSortTest()
+        {
+
+            var graph = CreateSimpleGraph();
             var sortedVertices = graph.TopologicalSort();
+        }
+
+        [TestMethod]
+        public void SimpleLongestPathFindingTest()
+        {
+            var graph = CreateSimpleGraph();
+            var longestPath = graph.FindLongestPath();
         }
     }
 }
+

@@ -18,6 +18,13 @@ namespace BoxProblemSolver
             EnteringEdges = new HashSet<Vertex>();
         }
 
+        public Vertex(Vertex vertex)
+        {
+            ExitingEdges = new HashSet<Vertex>();
+            EnteringEdges = new HashSet<Vertex>();
+            Index = vertex.Index;
+        }
+
         public void AddEdge(Vertex to)
         {
             ExitingEdges.Add(to);
@@ -37,9 +44,7 @@ namespace BoxProblemSolver
         //TODO: move index copying to graph
 	    public virtual Vertex Copy()
 	    {
-	        Vertex vertex = new Vertex();
-	        vertex.Index = Index;
-		    return vertex;
+		    return new Vertex(this);
 	    }
     }
 }

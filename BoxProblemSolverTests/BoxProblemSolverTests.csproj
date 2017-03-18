@@ -51,7 +51,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="GraphTests.cs" />
-    <Compile Include="IndexedVertex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
