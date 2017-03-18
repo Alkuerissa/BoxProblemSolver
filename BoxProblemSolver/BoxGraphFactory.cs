@@ -8,7 +8,7 @@ namespace BoxProblemSolver
 {
     public class BoxGraphFactory
     {
-        static Graph CreateBoxGraph(List<BoxVertex> boxes)
+        public static Graph CreateBoxGraph(List<BoxVertex> boxes)
         {
             var edges = new List<Tuple<Vertex, Vertex>>();
             for (int i = 0; i < boxes.Count; i++)

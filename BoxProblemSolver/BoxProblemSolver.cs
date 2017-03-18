@@ -12,20 +12,12 @@ namespace BoxProblemSolver
 
 		public BoxSolver(List<BoxVertex> vertices)
 		{
-			
+			graph = BoxGraphFactory.CreateBoxGraph(vertices);
 		}
 
 		public List<BoxVertex> Run()
 		{
-			return new List<BoxVertex>()
-			{
-				new BoxVertex(100, 80),
-				new BoxVertex(90, 65),
-				new BoxVertex(85, 50),
-				new BoxVertex(50, 40),
-				new BoxVertex(30, 25),
-				new BoxVertex(15, 10),
-			};
+			return graph.FindLongestPath().ConvertAll(vertex => (BoxVertex) vertex);
 		}
 	}
 }

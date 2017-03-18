@@ -58,7 +58,6 @@
     <Compile Include="BoxGraphFactory.cs" />
     <Compile Include="BoxProblemSolver.cs" />
     <Compile Include="BoxVertex.cs" />
-    <Compile Include="PriorityQueue.cs" />
     <Compile Include="Vertex.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
