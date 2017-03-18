@@ -13,8 +13,16 @@ namespace BoxProblemSolver
 
 	    public BoxVertex(double width, double height)
 	    {
-		    Width = width;
-		    Height = height;
+		    if (width >= height)
+		    {
+			    Width = width;
+			    Height = height;
+		    }
+		    else
+		    {
+			    Width = height;
+			    Height = width;
+		    }
 	    }
 
 		public override Vertex Copy()
