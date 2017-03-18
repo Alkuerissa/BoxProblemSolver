@@ -17,7 +17,7 @@ namespace BoxProblemSolverTests
             index = i;
         }
 
-        public Vertex Copy()
+        public override Vertex Copy()
         {
             return new IndexedVertex(index);
         }

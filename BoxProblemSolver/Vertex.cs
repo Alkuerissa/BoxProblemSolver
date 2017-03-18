@@ -10,6 +10,7 @@ namespace BoxProblemSolver
     {
         public HashSet<Vertex> ExitingEdges { get; protected set; }
         public HashSet<Vertex> EnteringEdges { get; protected set; }
+        public int Index;
 
         public Vertex()
         {
@@ -26,17 +27,19 @@ namespace BoxProblemSolver
         public void RemoveEdge(Vertex to)
         {
             ExitingEdges.Remove(to);
-            to.ExitingEdges.Remove(this);
+            to.EnteringEdges.Remove(this);
         }
 
         public bool HasEnteringEdges()
         {
             return EnteringEdges.Count > 0;
         }
-
+        //TODO: move index copying to graph
 	    public virtual Vertex Copy()
 	    {
-		    return new Vertex();
+	        Vertex vertex = new Vertex();
+	        vertex.Index = Index;
+		    return vertex;
 	    }
     }
 }

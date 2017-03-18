@@ -9,10 +9,18 @@ namespace BoxProblemSolver
     public class Graph
     {
         protected List<Vertex> vertices;
+        protected int maxIndex;
 
         public Graph(List<Vertex> start_vertices, List<Tuple<Vertex, Vertex>> edges)
         {
-            vertices = start_vertices;
+            vertices = new List<Vertex>();
+            maxIndex = 0;
+            foreach (var vertex in start_vertices)
+            {
+                vertices.Add(vertex);
+                vertex.Index = maxIndex++;
+            }
+
             foreach (var egde in edges)
             {
                 AddEdge(egde.Item1, egde.Item2);
@@ -28,10 +36,11 @@ namespace BoxProblemSolver
         {
             from.RemoveEdge(to);
         }
-
+        //TODO: it can be done better (probably)
         public Graph(Graph graph)
         {
             var oldVertices = new Dictionary<Vertex, int>();
+            vertices = new List<Vertex>();
             for (int i = 0; i < graph.vertices.Count; i++)
             {
                 oldVertices[graph.vertices[i]] = i;
@@ -56,8 +65,9 @@ namespace BoxProblemSolver
                 Vertex vertex = startVertices.First();
                 startVertices.Remove(vertex);
                 result.Add(vertex);
-                foreach (var edgeEnd in vertex.ExitingEdges)
+                while (vertex.ExitingEdges.Count > 0)
                 {
+                    var edgeEnd = vertex.ExitingEdges.First();
                     graph.RemoveEdge(vertex, edgeEnd);
                     if (!edgeEnd.HasEnteringEdges())
                         startVertices.Add(edgeEnd);
@@ -79,7 +89,36 @@ namespace BoxProblemSolver
 
         public List<Vertex> FindLongestPath()
         {
-            throw new NotImplementedException();
+            var sortedVertices = TopologicalSort();
+
+            var previousVerticeIndices = new int[maxIndex];
+            var longestPathToVertex = new int[maxIndex];
+            var currentLongestPathIndex = 0;
+
+            foreach (var vertex in sortedVertices.Skip(1))
+            {
+                longestPathToVertex[vertex.Index] = 0;
+                previousVerticeIndices[vertex.Index] = -1;
+                foreach (var startVertex in vertex.EnteringEdges)
+                {
+                    int newPathLength = longestPathToVertex[startVertex.Index] + 1;
+                    if (newPathLength > longestPathToVertex[vertex.Index])
+                    {
+                        longestPathToVertex[vertex.Index] = newPathLength;
+                        previousVerticeIndices[vertex.Index] = startVertex.Index;
+                    }
+                    if (newPathLength > longestPathToVertex[currentLongestPathIndex])
+                        currentLongestPathIndex = vertex.Index;
+                }
+            }
+
+            var longestPath = new List<Vertex>();
+            int i = currentLongestPathIndex;
+            while (i != -1)
+            {
+                //longestPath.Add();
+            }
+            return longestPath;
         }
     }
 }

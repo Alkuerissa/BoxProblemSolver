@@ -1,2 +1,15 @@
 D:\Dokumenty\Szkoła\MT\BoxProblemSolver\BoxProblemSolver\bin\Debug\BoxProblemSolver.exe.config
 D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\bin\Debug\BoxProblemSolver.exe.config
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\bin\Debug\BoxProblemSolver.exe
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\bin\Debug\BoxProblemSolver.pdb
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver.csprojResolveAssemblyReference.cache
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\MainWindow.g.cs
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\App.g.cs
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver_MarkupCompile.cache
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver_MarkupCompile.lref
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\MainWindow.baml
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver.g.resources
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver.Properties.Resources.resources
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver.csproj.GenerateResource.Cache
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver.exe
+D:\Dokumenty\Szkoła\BoxProblemSolver\BoxProblemSolver\obj\Debug\BoxProblemSolver.pdb
