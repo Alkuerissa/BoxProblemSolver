@@ -134,6 +134,7 @@ namespace BoxProblemSolver
                 longestPath.Add(indexVerticesMapping[i]);
                 i = previousVerticeIndices[i];
             }
+            longestPath.Reverse();
             return longestPath;
         }
     }
