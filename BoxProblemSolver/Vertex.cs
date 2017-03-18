@@ -41,8 +41,8 @@ namespace BoxProblemSolver
         {
             return EnteringEdges.Count > 0;
         }
-        //TODO: move index copying to graph
-	    public virtual Vertex Copy()
+
+        public virtual Vertex Copy()
 	    {
 		    return new Vertex(this);
 	    }

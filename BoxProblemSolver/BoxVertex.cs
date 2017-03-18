@@ -33,7 +33,7 @@ namespace BoxProblemSolver
 
 		public override Vertex Copy()
 		{
-			return new BoxVertex(Width, Height);
+			return new BoxVertex(this);
 		}
 
         public bool FitsIn(BoxVertex vertex)
