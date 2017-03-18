@@ -17,7 +17,7 @@ namespace BoxProblemSolver
 
 		public List<BoxVertex> Run()
 		{
-			return graph.FindLongestPath().ConvertAll(vertex => (BoxVertex) vertex);
+			return graph.FindLongestPath().Cast<BoxVertex>().ToList();
 		}
 	}
 }
