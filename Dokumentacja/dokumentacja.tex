@@ -61,9 +61,17 @@ Wykonanie opisanych powyżej czynności daje ostateczną złożoność $O(n^2)$.
 \subsection{Złożoność pamięciowa}
 Pamięć potrzebna na zapamiętanie grafu to $O(n^2)$ -- $n$ wierzchołków oraz $O(n^2)$ krawędzi. W sortowaniu topologicznym konieczne jest stworzenie kopii grafu (ponieważ usuwamy krawędzie), a ponadto w tym oraz następnym kroku potrzebna jest stała liczba pomocniczych tablic o długości $n$, co nie zwiększa ostatecznej złożoności pamięciowej algorytmu ponad $O(n^2)$.
 \section{Analiza poprawności}
-Fakt, że przekształcenie problemu pudełek na problem najdłuższej ścieżki w grafie został opisany wcześniej i nie wymaga dalszych wyjaśnień. Algorytm na sortowanie topologiczne to algorytm Kahna. Dowód poprawności został przedstawiony w jego artykule \cite{Kahn}. 
+Fakt, że przekształcenie problemu pudełek na problem najdłuższej ścieżki w grafie został opisany wcześniej i nie wymaga dalszych wyjaśnień. Sortowanie topologiczne jest możliwe, ponieważ graf jest acykliczny i skierowany. Algorytm na sortowanie topologiczne to algorytm Kahna. Dowód poprawności został przedstawiony w jego artykule \cite{Kahn}. 
 
+Dowód poprawności algorytmu znajdowania najdłuższej ścieżki w acyklicznym grafie skierowanym można przeprowadzić indukcyjnie.
 
+\textbf{Baza indukcji:} najdłuższa ścieżka kończąca się w każdym wierzchołku bez krawędzi wchodzących wynosi 0 -- prawda, bo składa się tylko z tego wierzchołka.
+
+\textbf{Krok indukcyjny:} jeśli dla każdego $u$ takiego, że $u$ poprzedza $v$ w kolejności sortowania topologicznego, najdłuższa ścieżka kończąca się w wierzchołku $u$ została wyznaczona poprawnie, to algorytm poprawnie wyznaczy najdłuższą ścieżkę kończącą się w wierzchołku $v$. 
+
+\textbf{Dowód kroku indukcyjnego:} niech $v$ to obecnie rozpatrywany wierzchołek, a $U$ to zbiór wierzchołków, z których istnieje krawędź do $v$. Z definicji sortowania topologicznego każdy wierzchołek $u \in U$, z którego istnieje krawędź do $v$, poprzedza go. To oznacza, że wszystkie wierzchołki ze zbioru $U$, które mogą się znajdować na ścieżce przed $v$ zostały już odwiedzone (została wyznaczona poprawna wartość). W związku z tym, najdłuższa ścieżka kończąca się w wierzchołku $v$ może zostać utworzona przez wybranie ze zbioru $U$ takiego wierzchołka, że ścieżka kończąca się w nim jest najdłuższa, i dodanie do niej wierzchołka $v$.
+
+Jeśli najdłuższe ścieżki kończące się w każdym wierzchołku zostały wyznaczone poprawnie, najdłuższą ścieżką w grafie jest najdłuższa spośród tych ścieżek.
 
 \begin{thebibliography}{20}
 \bibitem{Kahn}
