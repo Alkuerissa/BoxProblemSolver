@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+
+\title{Problem pudełek}
+\author{Ahmed Abdelkarim, Aleksandra Hernik}
+\begin{document}
+\maketitle
+\section{Definicja problemu}
+Problem polega na wybraniu spośród podanego zbioru pudełek, z których dla każdego podana jest szerokość i wysokość, największego ciągu pudełek takiego, że w każdym pudełku mieści się następne (możliwe są obroty o $\frac{\pi}{2}$). Pudełko mieści się w innym pudełku wtedy i tylko wtedy, gdy jego wysokość i szerokość są ostro mniejsze. 
+\section{Opis wejścia i wyjścia}
+\subsection{Wejście}
+Plik tekstowy, zawierający w każdej linii oddzielone spacjami wymiary jednego pudełka, na przykład:\\
+\texttt{10 5\\8 7\\2 3}
+\subsection{Wyjście}
+Plik tekstowy, w takim samym formacie jak plik wejściowy, ale zawierający posortowane malejąco pudełka, które tworzą najdłuższy ciąg. Ponadto program wyświetla graficzne przedstawienie rozwiązania.
+\section{Opis rozwiązania}
+Problem można sprowadzić do znalezienia najdłuższej ścieżki w acyklicznym grafie skierowanym. Każde pudełko jest wierzchołkiem grafu, a istnieje krawędź skierowana od $v_i$ do $v_j$ wtedy i tylko wtedy, gdy pudełko reprezentowane przez $v_j$ mieści się w pudełku reprezentowanym przez $v_i$. Tak zdefiniowany graf jest acykliczny ze względu na przyjętą definicję mieszczenia się pudełek - relacja mieszczenia się jest przechodnia i antysymetryczna (ze względu na opieranie się na relacji mniejszości posiadającej te cechy). Tworzenie grafu można przedstawić następująco:
+\begin{verbatim}
+graf = graf o n wierzchołkach
+dla i = 0..n
+	dla j = i..n
+		jeśli pudełka[i] mieści się w pudełka[j]
+			dodaj do grafu krawędź j->i
+		jeśli pudełka[j] mieści się w pudełka[i]
+			dodaj do grafu krawędź i->j
+\end{verbatim}
+
+W skierowanym grafie acyklicznym problem znalezienia najdłuższej ścieżki może zostać rozwiązany przez posortowanie topologiczne wierzchołków grafu, a następnie w ustalonej przez nie kolejności wybieranie najdłuższej ścieżki do każdego wierzchołka. Można to przedstawić następującym pseudokodem:
+\begin{verbatim}
+graf = stwórzGraf(pudełka)
+wierzchołki = sortujTopologicznie(graf)
+ścieżki = [0] * n
+dla każdego v z wierzchołki
+	dla każdego v_in mającego krawędź wchodzącą do v
+		nowaOdległość = ścieżki[v_in] + 1
+		jeśli nowaOdległość > ścieżki[v]
+			ścieżki[v] = nowaOdległość 
+\end{verbatim}
+Dla czytelności pominięte zostało zapamiętywanie samej ścieżki -- w każdym kroku należy zapamiętywać nie tylko długość, ale dodatkowo poprzedni wierzchołek. Wykorzystane tu sortowanie topologiczne opisuje poniższy pseudokod:
+\begin{verbatim}
+start = wierzchołki bez krawędzi wchodzących
+kolejność = []
+dopóki start niepuste
+	v = start[0]
+	usuń v ze start
+	dodaj v do kolejność
+	dla każdej e = krawędź wychodząca z v
+		usuń krawędź e z grafu
+		jeśli drugi koniec e nie ma krawędzi wchodzących, dodaj go do start
+\end{verbatim}
+\section{Analiza złożoności}
+\subsection{Złożoność czasowa}
+Algorytm składa się z następujących czynności:
+\begin{enumerate}
+\item Jeśli $n$ to liczba pudełek, to złożoność stworzenia grafu to $O(n^2)$ -- trzeba sprawdzić każdy wierzchołek z każdym.
+\item Złożoność sortowania topologicznego to $O(n^2)$ -- iterujemy po $n$ wierzchołkach, bo każdy wierzchołek jest dodawany do zbioru start dokładnie jeden raz, a od razu po rozpatrzeniu go jest usuwany. Dla każdego wierzchołka przechodzimy po wszystkich jego krawędziach, których może być co najwyżej $n-1$ -- krawędź do wszystkich pozostałych wierzchołków.
+\item Złożoność znalezienia najdłuższej ścieżki to $O(n^2)$ -- dla każdego wierzchołka jest rozpatrywana każda wchodząca do niego krawędź.
+\end{enumerate}
+Wykonanie opisanych powyżej czynności daje ostateczną złożoność $O(n^2)$.
+\subsection{Złożoność pamięciowa}
+Pamięć potrzebna na zapamiętanie grafu to $O(n^2)$ -- $n$ wierzchołków oraz $O(n^2)$ krawędzi. W sortowaniu topologicznym konieczne jest stworzenie kopii grafu (ponieważ usuwamy krawędzie), a ponadto w tym oraz następnym kroku potrzebna jest stała liczba pomocniczych tablic o długości $n$, co nie zwiększa ostatecznej złożoności pamięciowej algorytmu ponad $O(n^2)$.
+\section{Analiza poprawności}
+Fakt, że przekształcenie problemu pudełek na problem najdłuższej ścieżki w grafie został opisany wcześniej i nie wymaga dalszych wyjaśnień. Algorytm na sortowanie topologiczne to algorytm Kahna. Dowód poprawności został przedstawiony w jego artykule \cite{Kahn}. 
+
+
+
+\begin{thebibliography}{20}
+\bibitem{Kahn}
+Kahn, Arthur B. (1962), \textit{Topological sorting of large networks}, \textit{Communications of the ACM}, 5 (11): 558–562
+\end{thebibliography}
+\end{document}
