@@ -13,7 +13,7 @@ Problem polega na wybraniu spośród podanego zbioru pudełek, z których dla ka
 Plik tekstowy, zawierający w każdej linii oddzielone spacjami wymiary jednego pudełka, na przykład:\\
 \texttt{10 5\\8 7\\2 3}
 \subsection{Wyjście}
-Plik tekstowy, w pierwszej linii zawierający jedną liczbę -- długość ciągu -- a następne linie w takim samym formacie jak plik wejściowy, ale zawierający posortowane malejąco pudełka, które tworzą najdłuższy ciąg. Ponadto program wyświetla graficzne przedstawienie rozwiązania.
+Plik tekstowy, w pierwszej linii zawierający jedną liczbę -- długość ciągu. Następne linie są w takim samym formacie jak plik wejściowy, ale zawierają posortowane malejąco pudełka, które tworzą najdłuższy ciąg. Ponadto program wyświetla graficzne przedstawienie rozwiązania.
 \section{Opis rozwiązania}
 Problem można sprowadzić do znalezienia najdłuższej ścieżki w acyklicznym grafie skierowanym. Każde pudełko jest wierzchołkiem grafu, a istnieje krawędź skierowana od $v_i$ do $v_j$ wtedy i tylko wtedy, gdy pudełko reprezentowane przez $v_j$ mieści się w pudełku reprezentowanym przez $v_i$. Tak zdefiniowany graf jest acykliczny ze względu na przyjętą definicję mieszczenia się pudełek - relacja mieszczenia się jest przechodnia i antysymetryczna (ze względu na opieranie się na relacji mniejszości posiadającej te cechy). Tworzenie grafu można przedstawić następująco:
 \begin{verbatim}
