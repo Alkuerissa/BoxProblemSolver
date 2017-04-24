@@ -24,6 +24,7 @@ namespace BoxProblemSolver
     public partial class MainWindow : Window
     {
 	    private BoxSolver solver;
+	    private const string resultsFileName = "results.out";
 
         public MainWindow()
         {
@@ -56,7 +57,8 @@ namespace BoxProblemSolver
 				Canvas.SetLeft(rect, 0.5 * (BoxCanvas.Width - rect.Width));
 				Canvas.SetTop(rect, 0.5 * (BoxCanvas.Height - rect.Height));
 		    }
-	    }
+			MessageBox.Show(this, $"Found path with {results.Count} boxes.\nSaved as {resultsFileName}.", "Success!");
+		}
 
 	    private void LoadClick(object sender, RoutedEventArgs e)
 	    {
@@ -67,7 +69,10 @@ namespace BoxProblemSolver
 			    InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory,
 			    RestoreDirectory = true
 		    };
-		    dialog.ShowDialog();
+		    if (dialog.ShowDialog() != true)
+			    return;
+		    
+			
 			var vertices = new List<BoxVertex>();
 		    try
 		    {
@@ -82,7 +87,8 @@ namespace BoxProblemSolver
 		    }
 		    catch (Exception ex)
 		    {
-			    MessageBox.Show(this, $"An error occurred while loading: {ex.Message}", "Error");
+				MessageBox.Show(this, $"An error occurred while loading: {ex.Message}", "Error");
+			    return;
 		    }
 			MessageBox.Show(this, $"Loaded {vertices.Count} boxes.", "Result");
 			if (vertices.Count == 0)
@@ -94,10 +100,11 @@ namespace BoxProblemSolver
 	    private void RunClick(object sender, RoutedEventArgs e)
 	    {
 		    var results = solver.Run();
-		    var lines = new List<string>(results.Count);
+		    var lines = new List<string>(results.Count + 1);
+		    lines.Add(results.Count.ToString());
 		    foreach (var vertex in results)
 				lines.Add($"{vertex.Width} {vertex.Height}");
-			System.IO.File.WriteAllLines("results.out", lines);
+			System.IO.File.WriteAllLines(resultsFileName, lines);
 			DrawResults(results);
 	    }
     }
