@@ -24,7 +24,7 @@ namespace BoxProblemSolver
     public partial class MainWindow : Window
     {
 	    private BoxSolver solver;
-	    private const string resultsFileName = "results.out";
+	    private string resultsFileName = "results.txt";
 
         public MainWindow()
         {
@@ -83,6 +83,7 @@ namespace BoxProblemSolver
 				    {
 					    vertices.Add(new BoxVertex(double.Parse(s[2 * i]), double.Parse(s[2 * i + 1])));
 				    }
+				    resultsFileName = $"{System.IO.Path.GetFileNameWithoutExtension(dialog.SafeFileName)}_output.txt";
 			    }
 		    }
 		    catch (Exception ex)

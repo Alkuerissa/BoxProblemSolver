@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BoxProblemSolver", "BoxProblemSolver\BoxProblemSolver.csproj", "{C607CEA7-BAFD-4011-994A-43AA09FD85AC}"
