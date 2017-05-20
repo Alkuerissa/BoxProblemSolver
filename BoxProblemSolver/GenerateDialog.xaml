@@ -1,0 +1,48 @@
+﻿<Window x:Class="BoxProblemSolver.GenerateDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoxProblemSolver"
+        mc:Ignorable="d"
+        Title="Generate data" Height="135" MinHeight="135" Width="300" MinWidth="300">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Margin="5 5 0 5">Number of boxes:</TextBlock>
+        <DockPanel Grid.Column="1" Grid.Row="0" Margin="5 5 5 5">
+            <TextBlock DockPanel.Dock="Left" Text="{Binding ElementName=BoxesNumber, Path=Value}" Width="20"></TextBlock>
+            <Slider Name="BoxesNumber" Value="100" Minimum="1" Maximum="200" IsSelectionRangeEnabled="True" IsSnapToTickEnabled="True" TickFrequency="1"></Slider>
+        </DockPanel>
+        <TextBlock Grid.Column="0" Grid.Row="1" Margin="5 0 0 5">Output file name:</TextBlock>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="5 0 5 5" Name="FileNameBox"></TextBox>
+        <TextBlock Grid.Column="0" Grid.Row="2" Margin="5 0 0 0">Size:</TextBlock>
+        <Grid Grid.Column="1" Grid.Row="2" Margin="5 0 5 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Name="MinX" Text="0.5"></TextBox>
+            <TextBlock Grid.Column="1" Margin="5 0"> to </TextBlock>
+            <TextBox Grid.Column="2" Name="MaxX" Text="16.5"></TextBox>
+            <TextBlock Grid.Column="3" Margin="5 0"> ✕ </TextBlock>
+            <TextBox Grid.Column="4" Name="MinY" Text="0.5"></TextBox>
+            <TextBlock Grid.Column="5" Margin="5 0"> to</TextBlock>
+            <TextBox Grid.Column="6" Name="MaxY" Text="16.5"></TextBox>
+        </Grid>
+        <Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3" Margin="0 5 0 0" Click="GenerateClick">Generate</Button>
+    </Grid>
+</Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BoxProblemSolver"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="540" MaxHeight="600" MaxWidth="540" MinHeight="600" MinWidth="540">
+        Title="Box problem solver" Height="600" Width="540" MaxHeight="600" MaxWidth="540" MinHeight="600" MinWidth="540">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -16,9 +16,11 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Name="LoadButton" Grid.Column="0" Click="LoadClick">Load data</Button>
-            <Button Name="RunButton" Grid.Column="1" Click="RunClick" IsEnabled="False">Run</Button>
+            <Button Name="GenerateButton" Grid.Column="0" Click="GenerateClick">Generate and load</Button>
+            <Button Name="LoadButton" Grid.Column="1" Click="LoadClick">Load from file</Button>
+            <Button Name="RunButton" Grid.Column="2" Click="RunClick" IsEnabled="False">Run</Button>
         </Grid>        
     </Grid>
 </Window>
