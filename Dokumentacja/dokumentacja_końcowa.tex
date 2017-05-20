@@ -47,15 +47,15 @@ Wynik: lista składająca się ze wszystkich pudełek. Oznacza to, że liczby wy
 Dane wejściowe: 5 pudełek o wymiarach: 9x1, 8x2, 7x3, 6x4, 5x5. Można zauważyć, że dla każdego pudełka nie istnieje inne, które by się w nim mieściło.\\
 Wynik: 1 pudełko. Jako że w zadaniu nie było sprecyzowane zachowanie algorytmu w przypadku kilku poprawnych rozwiązań, zwracane jest tylko jedno z nich (w tym wypadku 9x1).
 
-\subsection{}
-Dane wejściowe:\\
-Wynik:
-
+\subsection{Wylosowane dane - 200 pudełek}
+Dane wejściowe: 200 pudełek o wymiarach wylosowanych z przedziału (0.5, 16.5). \\
+Wynik: lista 34 pudełek. W tym teście trudno zweryfikować poprawność rozwiązania. Jednak przy założeniu, że rozwiązanie jest poprawne, można wyciągnąć pewne wnioski. Po pierwsze dla 200 pudełek algorytm wykonuje się bardzo szybko. Po drugie po kilku uruchomieniach programu z losowymi danymi dla liczby pudełek równej 200 wynik za każdym razem był z przedziału [30, 40]. Można przypuszczać, że prawdopodobieństwo wystąpienia danych, w których większość pudełek znajdzie się w rozwiązaniu lub w których liczba pudełek w rozwiązaniu będzie bliska 1 jest niewielkie.
 \section{Wnioski}
 \begin{itemize}
 \item Podejście zachłanne (branie zawsze pudełka o największej powierzchni, które zmieści się w ostatnio dodanym pudełku) nie zawsze się sprawdza, co można było zaobserwować w teście 4. Analogiczny problem mógłby napotkać algorytm biorący zawsze najmniejsze pudełko. Jednak algorytm opierający się na przekształceniu problemu na problem grafowy radzi sobie z takimi sytuacjami.
-\item Nie jest możliwe określenie rozmiaru wyniku tylko na podstawie rozmiaru wejścia. Dla każdego n istnieje taki problem tego rozmiaru, że wynik zawiera jedno pudełko (test 6) i n pudełek (test 3).
+\item Nie jest możliwe określenie rozmiaru wyniku tylko na podstawie rozmiaru wejścia. Dla każdego n istnieje taki problem tego rozmiaru, że wynik zawiera jedno pudełko (test 6) i n pudełek (test 3). Z eksperymentów z losowymi danymi wynika, że dla większych zestawów danych rozmiar rozwiązania jest zwykle bliższy 1 niż n.
 \item Istnieją instancje problemów, dla których więcej niż jedno rozwiązanie jest prawdziwe. Niewielka modyfikacja algorytmu (nie zwiększająca złożoności) pozwalałaby na uzyskiwanie wszystkich poprawnych odpowiedzi.
+\item 
 \end{itemize}
 
 \section{Zmiany w stosunku do dokumentacji wstępnej}
@@ -76,6 +76,7 @@ Pliki wejściowe, zawierające zestawy testowe:
 \item \textit{two\textunderscore paths.txt} - dwie ścieżki,
 \item \textit{floats.txt} - liczby niecałkowite w danych,
 \item \textit{disconnected\textunderscore boxes.txt} - pudełka nie mieszczące się w sobie nawzajem,
+\item \textit{random.txt} - wylosowane dane - 200 pudełek.
 
 \end{enumerate}
 
