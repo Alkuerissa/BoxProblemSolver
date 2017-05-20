@@ -14,20 +14,22 @@
 \section{Opis testów}
 \subsection{8 identycznych pudełek}
 Dane wejściowe: 8 pudełek, każde o wymiarach 5x10 lub 10x5.
+
 Wynik: lista zawierająca jedno pudełko.
 
 \subsection{9 kwadratowych pudełek}
 Dane wejściowe: 9 różnych kwadratowych pudełek, o wymiarach od 1x1 do 9x9 (podanych w losowej kolejności). 
+
 Wynik: Lista zawierająca wszystkie pudełka.
 \begin{figure}[H]
 \caption{Graficzna reprezentacja wyniku}
 \includegraphics{square_boxes_res.png}
 \end{figure}
 
-\subsection{9 kwadratowych pudełek}
-Dane wejściowe: 9 różnych kwadratowych pudełek, o wymiarach od 1x1 do 9x9 (podanych w losowej kolejności). 
-Wynik: Lista zawierająca wszystkie pudełka.
+\subsection{Dwie ścieżki}
+Dane wejściowe: 5 pudełek o wymiarach: 11x10, 10x5, 8x6, 7x5, 3x2. W danych istnieją 2 pudełka (8x6 i 10x5), które mieszczą się w większym pudełku, ale nie w sobie nawzajem. Patrząc na pozostałe pudełka można zauważyć, że korzystniejszy jest wybór pudełka o mniejszej powierzchni - 8x6.
 
+Wynik: Aplikacja poprawnie dokonuje wyboru uzyskując w ten sposób ciąg 4-elementowy, zamiast 3-elementowy, jak w przypadku, gdyby zostało wybrane złe pudełko.
 
 \section{Wnioski}
 
@@ -39,5 +41,13 @@ Wynik: Lista zawierająca wszystkie pudełka.
 
 \section{Podział pracy}
 Ahmed Abdelkarim zaimplementował interfejs użytkownika i algorytm sortowania topologicznego, a Aleksandra Hernik napisała klasy użytkowe (takie jak klasa opisująca graf) i implementację algorytmu znajdowania najdłuższej ścieżki.
+
+\section{Załączniki}
+Pliki wejściowe, zawierające zestawy testowe:
+\begin{enumerate}
+\item identical_boxes.txt - 8 identycznych pudełek
+\item square_boxes.txt - 9 kwadratowych pudełek
+\item two_paths.txt - Dwie ścieżki
+\end{enumerate}
 
 \end{document}
