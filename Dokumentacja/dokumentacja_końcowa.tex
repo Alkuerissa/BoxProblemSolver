@@ -10,6 +10,7 @@
 \maketitle
 
 \section{Instrukcja obsługi}
+Po uruchomieniu programu widoczne jest poniższe okno:
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{instrukcja.png}
@@ -30,7 +31,7 @@ Pozwala ono wybrać kolejno:
 \item Granice wymiarów pudełek (minimalna i maksymalna szerokość $\times$ minimalna i maksymalna wysokość).
 \end{itemize}
 Po wciśnięciu przycisku \textit{Generate}, okienko zostanie zamknięte i wygenerowane zostaną pudełka zgodnie z wybranymi opcjami. Jeśli nazwa pliku nie zostanie podana, program wyświetli ostrzeżenie -- dane nie zostaną zapisane, ale będą wczytane do programu. W przypadku niepodania rozszerzenia pliku, automatyczne rozszerzenie to \textit{.txt}.
-
+\clearpage
 \section{Opis testów}
 \subsection{8 identycznych pudełek}
 Dane wejściowe: 8 pudełek, każde o wymiarach 5x10 lub 10x5. \\
@@ -64,6 +65,24 @@ Wynik: 1 pudełko. Jako że w zadaniu nie było sprecyzowane zachowanie algorytm
 \subsection{Wylosowane dane - 200 pudełek}
 Dane wejściowe: 200 pudełek o wymiarach wylosowanych z przedziału (0.5, 16.5). \\
 Wynik: lista 34 pudełek. W tym teście trudno zweryfikować poprawność rozwiązania. Jednak przy założeniu, że rozwiązanie jest poprawne, można wyciągnąć pewne wnioski. Po pierwsze dla 200 pudełek algorytm wykonuje się bardzo szybko. Po drugie po kilku uruchomieniach programu z losowymi danymi dla liczby pudełek równej 200 wynik za każdym razem był z przedziału [30, 40]. Można przypuszczać, że prawdopodobieństwo wystąpienia danych, w których większość pudełek znajdzie się w rozwiązaniu lub w których liczba pudełek w rozwiązaniu będzie bliska 1 jest niewielkie.
+\clearpage
+\section{Analiza}
+\subsection{Czas obliczeń}
+Przeprowadzony został test z generowanymi problemami o rozmiarach $1, 11, ... , 991$. Poniższy wykres przedstawia czas działania algorytmu oraz krzywą dopasowaną za pomocą modelu regresji liniowej (zależność $czas ~ n + n^2$). Otrzymane współczynniki to -7.168097e-05 przy $n$ i 3.250486e-07 przy $n^2$.
+\begin{figure}[H]
+\centering
+\includegraphics{czasy.png}
+\caption{Czas obliczeń}
+\end{figure}
+Jak widać, otrzymana krzywa jest dobrze dopasowana do pomiarów, co potwierdza wcześniejszą tezę, że algorytm ma złożoność rzędu $O(n^2)$.
+\subsection{Frakcja pudełek w najdłuższym ciągu}
+W taki sam sposób, jak w przypadku testów czasu obliczeń, została również sprawdzona frakcja pudełek, które znalazły się w znalezionym najdłuższym ciągu. Zgodnie z podejrzeniami, relacja jest malejąca, jak na poniższym wykresie.
+\begin{figure}[H]
+\centering
+\includegraphics{dlugosc.png}
+\caption{Frakcja rozwiązań w wyniku}
+\end{figure}
+\clearpage
 \section{Wnioski}
 \begin{itemize}
 \item Podejście zachłanne (branie zawsze pudełka o największej powierzchni, które zmieści się w ostatnio dodanym pudełku) nie zawsze się sprawdza, co można było zaobserwować w teście 4. Analogiczny problem mógłby napotkać algorytm biorący zawsze najmniejsze pudełko. Jednak algorytm opierający się na przekształceniu problemu na problem grafowy radzi sobie z takimi sytuacjami.

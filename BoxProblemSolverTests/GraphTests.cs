@@ -1,6 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BoxProblemSolver;
 
@@ -62,21 +67,41 @@ namespace BoxProblemSolverTests
         [TestMethod]
         public void MeanTimeAndResult()
         {
-            int maxn = 1000, step = 10;
+            int maxn = 1000, step = 10, repeats = 10;
             double[] times = new double[maxn / step];
             double[] resultsAsFraction = new double[maxn / step];
-            for (int i = 0; i < maxn / step; i++)
-            {
-                int n = i * step + 1;
-                List<BoxVertex> vertices = GenerateData(n);
-                BoxSolver solver = new BoxSolver(vertices);
-                Stopwatch sw = new Stopwatch();
-                sw.Start();
-                var result = solver.Run();
-                sw.Stop();
-                times[i] = sw.Elapsed.TotalSeconds;
-                resultsAsFraction[i] = (double)result.Count / n;
-            }
+	        for (int j = 0; j < repeats; ++j)
+	        {
+		        for (int i = 0; i < maxn / step; i++)
+		        {
+			        int n = i * step + 1;
+			        List<BoxVertex> vertices = GenerateData(n);
+			        BoxSolver solver = new BoxSolver(vertices);
+			        Stopwatch sw = new Stopwatch();
+			        sw.Start();
+			        var result = solver.Run();
+			        sw.Stop();
+			        times[i] += sw.Elapsed.TotalSeconds;
+			        resultsAsFraction[i] += (double) result.Count / n;
+		        }
+	        }
+	        for (int i = 0; i < times.Length; ++i)
+	        {
+		        times[i] /= repeats;
+		        resultsAsFraction[i] /= repeats;
+	        }
+	        using (var sw = new StreamWriter("MeanTimeAndResult.R"))
+	        {
+		        sw.Write($"times = c({times[0].ToString(CultureInfo.InvariantCulture)}");
+				foreach (var t in times.Skip(1))
+					sw.Write($",{t.ToString(CultureInfo.InvariantCulture)}");
+				sw.WriteLine(")");
+
+				sw.Write($"results = c({resultsAsFraction[0].ToString(CultureInfo.InvariantCulture)}");
+				foreach (var r in resultsAsFraction.Skip(1))
+					sw.Write($", {r.ToString(CultureInfo.InvariantCulture)}");
+				sw.WriteLine(")");
+	        }
         }
     }
 }
