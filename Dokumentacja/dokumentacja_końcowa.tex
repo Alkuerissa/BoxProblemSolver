@@ -67,8 +67,9 @@ Dane wejściowe: 200 pudełek o wymiarach wylosowanych z przedziału (0.5, 16.5)
 Wynik: lista 34 pudełek. W tym teście trudno zweryfikować poprawność rozwiązania. Jednak przy założeniu, że rozwiązanie jest poprawne, można wyciągnąć pewne wnioski. Po pierwsze dla 200 pudełek algorytm wykonuje się bardzo szybko. Po drugie po kilku uruchomieniach programu z losowymi danymi dla liczby pudełek równej 200 wynik za każdym razem był z przedziału [30, 40]. Można przypuszczać, że prawdopodobieństwo wystąpienia danych, w których większość pudełek znajdzie się w rozwiązaniu lub w których liczba pudełek w rozwiązaniu będzie bliska 1 jest niewielkie.
 \clearpage
 \section{Analiza}
+Przeprowadzone został testy z generowanymi problemami o rozmiarach $1, 11, ... , 991$, dla każdej 10 powtórzeń.
 \subsection{Czas obliczeń}
-Przeprowadzony został test z generowanymi problemami o rozmiarach $1, 11, ... , 991$. Poniższy wykres przedstawia czas działania algorytmu oraz krzywą dopasowaną za pomocą modelu regresji liniowej (zależność $czas ~ n + n^2$). Otrzymane współczynniki to -7.168097e-05 przy $n$ i 3.250486e-07 przy $n^2$.
+Poniższy wykres przedstawia czas działania algorytmu oraz krzywą dopasowaną za pomocą modelu regresji liniowej (zależność $czas ~ n + n^2$). Otrzymane współczynniki to -7.168097e-05 przy $n$ i 3.250486e-07 przy $n^2$.
 \begin{figure}[H]
 \centering
 \includegraphics{czasy.png}
@@ -82,6 +83,7 @@ W taki sam sposób, jak w przypadku testów czasu obliczeń, została również 
 \includegraphics{dlugosc.png}
 \caption{Frakcja rozwiązań w wyniku}
 \end{figure}
+Kształt wykresu przypomina hiperbolę.
 \clearpage
 \section{Wnioski}
 \begin{itemize}
