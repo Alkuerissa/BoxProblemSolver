@@ -36,6 +36,10 @@ Po wciśnięciu przycisku \textit{Generate}, okienko zostanie zamknięte i wygen
 Dane wejściowe: 8 pudełek, każde o wymiarach 5x10 lub 10x5. \\
 Wynik: lista zawierająca jedno pudełko.
 
+\subsection{Duże, 5 średnich, małe}
+Dane wejściowe: 7 pudełek, jedno 10x10, jedno 1x1 i pięć 5x5. \\
+Wynik: lista zawierająca trzy pudełka: duże, średnie i małe.
+
 \subsection{9 kwadratowych pudełek}
 Dane wejściowe: 9 różnych kwadratowych pudełek, o wymiarach od 1x1 do 9x9 (podanych w losowej kolejności).  \\
 Wynik: Lista zawierająca wszystkie pudełka.
@@ -53,7 +57,20 @@ Wynik: Aplikacja poprawnie dokonuje wyboru uzyskując w ten sposób ciąg 4-elem
 Dane wejściowe: 3 pudełka o wymiarach: 10,01x7,01, 7x10, 6,99x9,99.\\
 Wynik: lista składająca się ze wszystkich pudełek. Oznacza to, że liczby wymierne (a nie tylko całkowite) są wczytywane poprawnie.
 
+\subsection{Pudełka nie mieszczące się w sobie nawzajem}
+Dane wejściowe: 5 pudełek o wymiarach: 9x1, 8x2, 7x3, 6x4, 5x5. Można zauważyć, że dla każdego pudełka nie istnieje inne, które by się w nim mieściło.\\
+Wynik: 1 pudełko. Jako że w zadaniu nie było sprecyzowane zachowanie algorytmu w przypadku kilku poprawnych rozwiązań, zwracane jest tylko jedno z nich (w tym wypadku 9x1).
+
+\subsection{}
+Dane wejściowe:\\
+Wynik:
+
 \section{Wnioski}
+\begin{itemize}
+\item Podejście zachłanne (branie zawsze pudełka o największej powierzchni, które zmieści się w ostatnio dodanym pudełku) nie zawsze się sprawdza, co można było zaobserwować w teście 4. Analogiczny problem mógłby napotkać algorytm biorący zawsze najmniejsze pudełko. Jednak algorytm opierający się na przekształceniu problemu na problem grafowy radzi sobie z takimi sytuacjami.
+\item Nie jest możliwe określenie rozmiaru wyniku tylko na podstawie rozmiaru wejścia. Dla każdego n istnieje taki problem tego rozmiaru, że wynik zawiera jedno pudełko (test 6) i n pudełek (test 3).
+\item Istnieją instancje problemów, dla których więcej niż jedno rozwiązanie jest prawdziwe. Niewielka modyfikacja algorytmu (nie zwiększająca złożoności) pozwalałaby na uzyskiwanie wszystkich poprawnych odpowiedzi.
+\end{itemize}
 
 \section{Zmiany w stosunku do dokumentacji wstępnej}
 \begin{itemize}
@@ -69,9 +86,11 @@ Ahmed Abdelkarim zaimplementował interfejs użytkownika, generator danych i alg
 Pliki wejściowe, zawierające zestawy testowe:
 \begin{enumerate}
 \item \textit{identical\textunderscore boxes.txt} - 8 identycznych pudełek,
+\item \textit{big\textunderscore 5medium\textunderscore small.txt} - duże, 5 średnich, małe,
 \item \textit{square\textunderscore boxes.txt} - 9 kwadratowych pudełek,
 \item \textit{two\textunderscore paths.txt} - dwie ścieżki,
 \item \textit{floats.txt} - liczby niecałkowite w danych,
+\item \textit{disconnected\textunderscore boxes.txt} - pudełka nie mieszczące się w sobie nawzajem,
 
 \end{enumerate}
 
