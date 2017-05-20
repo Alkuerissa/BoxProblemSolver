@@ -13,9 +13,23 @@
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{instrukcja.png}
-\caption{Interfejs użytkownika}
+\caption{Główne okno programu}
 \end{figure}
-Aby skorzystać z aplikacji, należy najpierw kliknąć na przycisk \textit{Load data} (1) i wybrać plik z danymi wejściowymi. Po zaakceptowaniu pliku pojawi się komunikat o liczbie wczytanych pudełek. Następnie trzeba kliknąć przycisk \textit{Run} (2). W wyniku pojawi się komunikat o długości najdłuższego możliwego ciągu pudełek oraz nazwa pliku wynikowego. Ponadto, w obszarze powyżej guzików (3) zostanie przedstawiona graficzna reprezentacja rozwiązania. Uwaga: wszystkie pudełka są obrócone tak, że dłuższa krawędź to szerokość.  Pudełka są przeskalowane tak, że największe z nich zajmuje całą szerokość okienka.
+Aby skorzystać z aplikacji, należy najpierw kliknąć na przycisk \textit{Load data} (2) i wybrać plik z danymi wejściowymi. Po zaakceptowaniu pliku pojawi się komunikat o liczbie wczytanych pudełek. \\
+Następnie trzeba kliknąć przycisk \textit{Run} (3). W wyniku pojawi się komunikat o długości najdłuższego możliwego ciągu pudełek oraz nazwa pliku wynikowego. Ponadto, w obszarze powyżej guzików (4) zostanie przedstawiona graficzna reprezentacja rozwiązania. Uwaga: wszystkie pudełka są obrócone tak, że dłuższa krawędź to szerokość.  Pudełka są przeskalowane tak, że największe z nich zajmuje całą szerokość okienka. \\
+Innym sposobem otrzymania danych wejściowych jest ich wygenerowanie -- w tym celu należy kliknąć na przycisk \textit{Generate and load} (4), aby uzyskać okienko generowania danych, przedstawione poniżej.
+\begin{figure}[H]
+\centering
+\includegraphics{generate.png}
+\caption{Generator danych}
+\end{figure}
+Pozwala ono wybrać kolejno:
+\begin{itemize}
+\item Liczbę pudełek (1-200),
+\item Nazwę pliku wynikowego,
+\item Granice wymiarów pudełek (minimalna i maksymalna szerokość $\times$ minimalna i maksymalna wysokość).
+\end{itemize}
+Po wciśnięciu przycisku \textit{Generate}, okienko zostanie zamknięte i wygenerowane zostaną pudełka zgodnie z wybranymi opcjami. Jeśli nazwa pliku nie zostanie podana, program wyświetli ostrzeżenie -- dane nie zostaną zapisane, ale będą wczytane do programu. W przypadku niepodania rozszerzenia pliku, automatyczne rozszerzenie to \textit{.txt}.
 
 \section{Opis testów}
 \subsection{8 identycznych pudełek}
@@ -45,10 +59,11 @@ Wynik: lista składająca się ze wszystkich pudełek. Oznacza to, że liczby wy
 \begin{itemize}
 \item Na początku wynikowego pliku dodana jest informacja o długości otrzymanej ścieżki.
 \item Dla pliku wejściowego o nazwie \textit{file.ext}, plik wyjściowy nazywa się \textit{file\textunderscore output.txt}.
+\item Dodany został generator danych.
 \end{itemize}
 
 \section{Podział pracy}
-Ahmed Abdelkarim zaimplementował interfejs użytkownika i algorytm sortowania topologicznego, a Aleksandra Hernik napisała klasy użytkowe (takie jak klasa opisująca graf) i implementację algorytmu znajdowania najdłuższej ścieżki.
+Ahmed Abdelkarim zaimplementował interfejs użytkownika, generator danych i algorytm sortowania topologicznego, a Aleksandra Hernik napisała klasy użytkowe (takie jak klasa opisująca graf) i implementację algorytmu znajdowania najdłuższej ścieżki.
 
 \section{Załączniki}
 Pliki wejściowe, zawierające zestawy testowe:
