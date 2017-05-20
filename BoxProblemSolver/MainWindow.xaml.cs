@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -25,6 +26,14 @@ namespace BoxProblemSolver
     {
 	    private BoxSolver solver;
 	    private string resultsFileName = "results.txt";
+
+	    public BoxSolver Solver
+	    {
+		    set {
+				solver = value;
+			    RunButton.IsEnabled = true;
+		    }
+	    }
 
         public MainWindow()
         {
@@ -57,10 +66,17 @@ namespace BoxProblemSolver
 				Canvas.SetLeft(rect, 0.5 * (BoxCanvas.Width - rect.Width));
 				Canvas.SetTop(rect, 0.5 * (BoxCanvas.Height - rect.Height));
 		    }
-			MessageBox.Show(this, $"Found path with {results.Count} boxes.\nSaved as {resultsFileName}.", "Success!");
+			MessageBox.Show(this, $"Found path with {results.Count} boxes.\nSaved as {resultsFileName}.", "Success!", MessageBoxButton.OK, MessageBoxImage.Information);
 		}
 
-	    private void LoadClick(object sender, RoutedEventArgs e)
+		private void GenerateClick(object sender, RoutedEventArgs e)
+		{
+			var dialog = new GenerateDialog();
+			dialog.Owner = this;
+			dialog.ShowDialog();
+		}
+
+		private void LoadClick(object sender, RoutedEventArgs e)
 	    {
 		    var dialog = new OpenFileDialog
 		    {
@@ -81,21 +97,21 @@ namespace BoxProblemSolver
 				    var s = sr.ReadToEnd().Split(new[] {' ', '\n', '\t'}, StringSplitOptions.RemoveEmptyEntries);
 				    for (int i = 0; i < s.Length / 2; ++i)
 				    {
-					    vertices.Add(new BoxVertex(double.Parse(s[2 * i]), double.Parse(s[2 * i + 1])));
+					    vertices.Add(new BoxVertex(double.Parse(s[2 * i].Replace(',', '.'), CultureInfo.InvariantCulture), 
+							double.Parse(s[2 * i + 1].Replace(',', '.'), CultureInfo.InvariantCulture)));
 				    }
 				    resultsFileName = $"{System.IO.Path.GetFileNameWithoutExtension(dialog.SafeFileName)}_output.txt";
 			    }
 		    }
 		    catch (Exception ex)
 		    {
-				MessageBox.Show(this, $"An error occurred while loading: {ex.Message}", "Error");
+				MessageBox.Show(this, $"An error occurred while loading: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			    return;
 		    }
-			MessageBox.Show(this, $"Loaded {vertices.Count} boxes.", "Result");
+			MessageBox.Show(this, $"Loaded {vertices.Count} boxes.", "Result", MessageBoxButton.OK, MessageBoxImage.Information);
 			if (vertices.Count == 0)
 				return;
-		    solver = new BoxSolver(vertices);
-		    RunButton.IsEnabled = true;
+		    Solver = new BoxSolver(vertices);
 	    }
 
 	    private void RunClick(object sender, RoutedEventArgs e)
@@ -104,7 +120,7 @@ namespace BoxProblemSolver
 		    var lines = new List<string>(results.Count + 1);
 		    lines.Add(results.Count.ToString());
 		    foreach (var vertex in results)
-				lines.Add($"{vertex.Width} {vertex.Height}");
+				lines.Add($"{vertex.Width.ToString(CultureInfo.InvariantCulture)} {vertex.Height.ToString(CultureInfo.InvariantCulture)}");
 			System.IO.File.WriteAllLines(resultsFileName, lines);
 			DrawResults(results);
 	    }
